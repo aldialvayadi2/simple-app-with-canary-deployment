@@ -1,0 +1,8 @@
+stable:
+  Version: v1
+  Replicas: 4
+
+canary:
+  Version: v2
+  Replicas: 1
+  Weight: 10

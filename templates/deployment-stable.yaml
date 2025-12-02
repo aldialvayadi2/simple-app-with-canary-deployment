@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-app-{{ .Values.stable.Version }}
+  namespace: simple-app
+spec:
+  replicas: {{ .Values.stable.Replicas }}
+  selector:
+    matchLabels:
+      app: simple-app
+      version: {{ .Values.stable.Version }}
+  template:
+    metadata:
+      labels:
+        app: simple-app
+        version: {{ .Values.stable.Version }}
+    spec:
+      containers:
+      - name: simple-app
+        image: app:{{ .Values.stable.Version }}
+        ports:
+        - containerPort: 80

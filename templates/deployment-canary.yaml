@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-app-{{ .Values.canary.Version }}
+  namespace: simple-app
+spec:
+  replicas: {{ .Values.canary.Replicas }}
+  selector:
+    matchLabels:
+      app: simple-app
+      version: {{ .Values.canary.Version }}
+  template:
+    metadata:
+      labels:
+        app: simple-app
+        version: {{ .Values.canary.Version }}
+    spec:
+      containers:
+      - name: simple-app
+        image: app:{{ .Values.canary.Version }}
+        ports:
+        - containerPort: 80

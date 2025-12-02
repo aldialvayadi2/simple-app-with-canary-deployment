@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: simple-app-ingress
+  namespace: simple-app
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "{{ .Values.canary.Weight }}"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: stable.simple-app.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: simple-app-svc-{{ .Values.canary.Version }}
+            port:
+              number: 80
