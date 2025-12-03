@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: simple-app
-        image: app:{{ .Values.stable.Version }}
+        image: docker.io/library/app:{{ .Values.stable.Version }}
         ports:
         - containerPort: 80

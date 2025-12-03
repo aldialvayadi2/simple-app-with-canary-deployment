@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: simple-app-vs
+  namespace: simple-app
+spec:
+  hosts:
+  - simple-app-svc-{{ .Values.stable.Version }}.simple-app.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: simple-app-svc-{{ .Values.stable.Version }}.simple-app.svc.cluster.local
+        subset: {{ .Values.stable.Version }}
+      weight: {{ .Values.stable.Weight }}
+    - destination:
+        host: simple-app-svc-{{ .Values.stable.Version }}.simple-app.svc.cluster.local
+        subset: {{ .Values.canary.Version }}
+      weight: {{ .Values.canary.Weight }}

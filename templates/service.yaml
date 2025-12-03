@@ -1,12 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: simple-app-svc-{{ .Values.canary.Version }}
+  name: simple-app-svc-{{ .Values.stable.Version }}
   namespace: simple-app
+  labels:
+    app: simple-app
+    service: simple-app
 spec:
   selector:
     app: simple-app
-    version: {{ .Values.canary.Version }}
   ports:
   - protocol: TCP
     port: 80

@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: simple-app
-        image: app:{{ .Values.canary.Version }}
+        image: docker.io/library/app:{{ .Values.canary.Version }}
         ports:
         - containerPort: 80

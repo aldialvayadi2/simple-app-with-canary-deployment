@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: simple-app-dr
+  namespace: simple-app
+spec:
+  host: simple-app-svc-{{ .Values.stable.Version }}.simple-app.svc.cluster.local
+  subsets:
+  - name: {{ .Values.stable.Version }}
+    labels:
+      version: {{ .Values.stable.Version }}
+  - name: {{ .Values.canary.Version }}
+    labels:
+      version: {{ .Values.canary.Version }}
